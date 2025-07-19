@@ -487,7 +487,7 @@ const useFormState = (): UseFormStateReturn => {
   const [emailError, setEmailError] = useState('');
  
 
-const updateField = useCallback((field: keyof FormData, value: any) => {
+const updateField = useCallback((field: keyof FormData, value: FormData[]) => {
   setFormData(prev => ({ ...prev, [field]: value }));
 }, []);
 
@@ -601,9 +601,10 @@ useEffect(() => {
       toast.success("Message sent successfully!");
       reset(); // Reset the form
       
-    } catch (err: any) {
-      console.error('Submission error:', err);
-      toast.error(err.message || "Failed to send message. Please try again.");
+    } catch (err) {
+      const error = err as Error;
+      console.error('Submission error:', error);
+      toast.error(error.message || "Failed to send message. Please try again.");
     } finally {
       setIsSubmitting(false);
     }
