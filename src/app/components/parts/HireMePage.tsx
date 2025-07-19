@@ -919,10 +919,6 @@ const HireMePage: React.FC = () => {
 };
 
 
-SelectField.displayName = "SelectField";
-DatePickerField.displayName = "DatePickerField";
-TimePickerField.displayName = "TimePickerField";
-TextareaField.displayName = "TextareaField";
 SubmitButton.displayName = "SubmitButton";
 
 
