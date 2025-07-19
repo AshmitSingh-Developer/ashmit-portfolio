@@ -1,5 +1,5 @@
 'use client';
-import React, { Attributes } from 'react'
+import React from 'react'
 import dynamic from 'next/dynamic';
 import Navbar from '../components/PortfolioNavbar';
 import Home from '../components/PortfolioHome';

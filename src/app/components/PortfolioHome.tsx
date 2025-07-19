@@ -33,7 +33,7 @@ const PortfolioHome = () => {
               My Resume
             </a>
             <a href="#contact" className='px-6 py-3 border-1 border-cyan-500 text-cyan-500 font-helvetica rounded-lg hover:bg-cyan-500 hover:text-black transition-all duration-300 hover:[box-shadow:0_0_15px_rgba(6,182,212,0.7)]'>
-              Let's Talk
+              Let&apos;s Talk
             </a>
           </div>
           <div className='hidden lg:flex items-center justify-center lg:justify-start gap-6'>

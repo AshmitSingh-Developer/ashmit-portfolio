@@ -1,9 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-interface IrishGateCardProps{
-
-}
 
 const IrisGateCard = ({ availableCardRef, availableInView, cardVariants, itemVariants }) => {
   const [isOpening, setIsOpening] = useState(false);
@@ -26,7 +23,7 @@ const IrisGateCard = ({ availableCardRef, availableInView, cardVariants, itemVar
   );
 
   const starPositions = useMemo(() => 
-    Array.from({ length: 30 }, (_, i) => ({
+    Array.from({ length: 30 },() => ({
       left: Math.random() * 100,
       top: Math.random() * 100,
       delay: Math.random() * 2,

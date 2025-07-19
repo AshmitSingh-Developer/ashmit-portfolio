@@ -29,7 +29,7 @@ const SpaceBackground = () => {
       twinkleSpeed: Math.random() * 0.02 + 0.01,
     }));
 
-    let shootingStars: {
+    const shootingStars: {
       x: number;
       y: number;
       length: number;

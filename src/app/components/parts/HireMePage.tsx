@@ -6,6 +6,7 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import SpaceBackground from './HireMePageBG';
 import Navbar from '../PagesNavbar';
+import Image from 'next/image';
 
 import { toast } from '@/lib/toast';
 
@@ -183,7 +184,7 @@ const StatusCard = memo(({ label, value, className = "" }: { label: string; valu
 const ProfileImage = memo(({ src, alt }: { src: string; alt: string }) => (
   <div className="relative mb-6">
     <div className="relative">
-      <img
+      <Image
         src={src}
         alt={alt}
         width={144}
@@ -597,7 +598,7 @@ useEffect(() => {
     } finally {
       setIsSubmitting(false);
     }
-  }, [formData, reset]);
+  }, [formData, reset,emailStatus]);
 
   return { formData, updateField, handleSubmit, isSubmitting, emailStatus, emailError };
 };
@@ -647,7 +648,7 @@ const HireMePage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-10 gap-8">
             {/* Profile Card */}
             
-                        {/* Profile Card - Mobile (Single Card) */}
+             {/* Profile Card - Mobile (Single Card) */}
             {/* Profile Card - Mobile (Single Card) */}
             <ProfileCard data={PROFILE_DATA} onCopy={handleCopy} isMobile />
             <ProfileCard data={PROFILE_DATA} onCopy={handleCopy} />
@@ -661,7 +662,7 @@ const HireMePage: React.FC = () => {
               className="glassy z-10 md:col-span-7"
             >
               <h2 className="text-3xl unselectable font-Helvetica font-bold mb-4 text-center">
-                Let's Work Together
+                Let&apos;s Work Together
               </h2>
 
               <motion.form

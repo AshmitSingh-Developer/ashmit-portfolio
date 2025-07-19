@@ -26,8 +26,8 @@ export default function SuggestPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
       >
-        I’m passionate about creating fast, beautiful, and user-friendly websites.
-        Whether it's a portfolio, SaaS dashboard, or landing page – I bring both design and code together to deliver value. Let’s work together to turn your vision into reality.
+        I&apos;m passionate about creating fast, beautiful, and user-friendly websites.
+        Whether it's a portfolio, SaaS dashboard, or landing page &lsquo; I bring both design and code together to deliver value. Let&apos;s work together to turn your vision into reality.
       </motion.p>
 
       <motion.div

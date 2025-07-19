@@ -1,5 +1,6 @@
 'use client';
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import Image from 'next/image';
 
 const PortfolioAbout = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -81,7 +82,7 @@ const PortfolioAbout = () => {
                 {/* About Text Content */}
                 <div className="flex-1 space-y-6 text-lg text-gray-300 leading-relaxed">
                   <p className="text-xl text-white font-medium">
-                    I'm a passionate full-stack developer with a knack for creating dynamic and user-friendly web applications.
+                    I&apos;m a passionate full-stack developer with a knack for creating dynamic and user-friendly web applications.
                   </p>
                   <p>
                     With expertise in modern front-end technologies like <span className="text-blue-400 font-semibold">React</span> and <span className="text-blue-400 font-semibold">Next.js</span>, combined with robust back-end solutions using <span className="text-green-400 font-semibold">Node.js</span> and <span className="text-green-400 font-semibold">Express</span>, I build comprehensive digital experiences.
@@ -101,7 +102,7 @@ const PortfolioAbout = () => {
                         
                         {/* Image container */}
                         <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
-                          <img
+                          <Image
                             src="/my-avatar2.png"
                             alt="Ashmit Singh"
                             className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"

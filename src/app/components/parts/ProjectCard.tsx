@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
+import Image from 'next/image';
 
 interface Project {
   id: number;
@@ -33,7 +34,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
         {/* Image Container */}
         <div className="relative overflow-hidden rounded-t-2xl">
           <div className="aspect-video w-full relative">
-            <img
+            <Image
               src={project.img}
               alt={project.title}
               className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
@@ -88,7 +89,7 @@ const ProjectCard = ({ project }: { project: Project }) => {
                 }}
               >
                 <div className={`w-11 h-11 rounded-xl bg-slate-800/60 backdrop-blur-sm border border-slate-600/40 flex items-center justify-center transition-all duration-300 group-hover:border-purple-400/60 group-hover:bg-slate-700/60 group/icon:hover:scale-110 group/icon:hover:bg-purple-500/20 group/icon:hover:border-purple-400`}>
-                  <img src={icon} alt="tech" className="w-5 h-5 object-contain" />
+                  <Image src={icon} alt="tech" className="w-5 h-5 object-contain" />
                 </div>
                 
                 {/* Sharp Tooltip */}

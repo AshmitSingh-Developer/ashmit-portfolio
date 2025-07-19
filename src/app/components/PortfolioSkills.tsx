@@ -239,7 +239,7 @@ const PortfolioSkills = () => {
 
           {/* Page Bio */}
           <AnimationReveal variantType="fade-in">
-            <p className='text-muted-foreground my-font1 max-w-2xl mt-3 mb-5 sm:mb-8'>I've worked with a range of technologies in the web development world, from frontend to backend and everything in between.</p>
+            <p className='text-muted-foreground my-font1 max-w-2xl mt-3 mb-5 sm:mb-8'>I&apos;ve worked with a range of technologies in the web development world, from frontend to backend and everything in between.</p>
           </AnimationReveal>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {memoizedSkills.map((skill) => (
