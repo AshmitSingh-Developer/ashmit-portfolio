@@ -128,6 +128,7 @@ const PROFILE_DATA: ProfileData = {
 
 // Utility Components
 const StatusIndicator = memo(() => (
+  
   <motion.div
     className="relative"
     animate={{ scale: [1, 1.1, 1], opacity: [0.8, 1, 0.8] }}
@@ -137,6 +138,7 @@ const StatusIndicator = memo(() => (
     <div className="absolute inset-0 w-2 h-2 bg-green-400 rounded-full animate-ping" />
   </motion.div>
 ));
+StatusIndicator.displayName = "StatusIndicator";
 
 const SocialIcon = memo(({ href, children, label }: { href: string; children: React.ReactNode; label: string }) => (
   <a 
@@ -147,7 +149,7 @@ const SocialIcon = memo(({ href, children, label }: { href: string; children: Re
     {children}
   </a>
 ));
-
+SocialIcon.displayName = "SocialIcon";
 const ContactItem = memo(({ icon, label, value, onClick }: { 
   icon: React.ReactNode; 
   label: string; 
@@ -165,7 +167,7 @@ const ContactItem = memo(({ icon, label, value, onClick }: {
     </div>
   </div>
 ));
-
+ContactItem.displayName = "ContactItem";
 const StatusCard = memo(({ label, value, className = "" }: { label: string; value: string | React.ReactNode; className?: string }) => (
   <div 
     className={`flex unselectable items-center justify-between p-3 rounded-lg transition-all duration-300 ease-in-out ${className}`}
@@ -179,6 +181,7 @@ const StatusCard = memo(({ label, value, className = "" }: { label: string; valu
     <div className="flex items-center gap-2">{value}</div>
   </div>
 ));
+StatusCard.displayName = "StatusCard";
 
 // Profile Components
 const ProfileImage = memo(({ src, alt }: { src: string; alt: string }) => (
@@ -196,6 +199,7 @@ const ProfileImage = memo(({ src, alt }: { src: string; alt: string }) => (
     <div className="absolute inset-[-2px] rounded-full border-2 border-cyan-400/20 animate-pulse" />
   </div>
 ));
+ProfileImage.displayName = "ProfileImage";
 
 const ProfileInfo = memo(({ data }: { data: ProfileData }) => (
   <div className="text-center unselectable">
@@ -206,6 +210,7 @@ const ProfileInfo = memo(({ data }: { data: ProfileData }) => (
     <p className="text-sm text-gray-400">{data.subtitle}</p>
   </div>
 ));
+ProfileInfo.displayName = "ProfileInfo";
 
 const ContactInfo = memo(({ data, onCopy }: { data: ProfileData; onCopy: (text: string) => void }) => {
   const icons = {
@@ -249,6 +254,7 @@ const ContactInfo = memo(({ data, onCopy }: { data: ProfileData; onCopy: (text: 
     </div>
   );
 });
+ContactInfo.displayName = "ContactInfo";
 
 const SocialLinks = memo(({ links }: { links: ProfileData['socialLinks'] }) => (
   <div className="flex justify-center gap-4">
@@ -269,6 +275,7 @@ const SocialLinks = memo(({ links }: { links: ProfileData['socialLinks'] }) => (
     </SocialIcon>
   </div>
 ));
+SocialLinks.displayName = "SocialLinks";
 
 // Optimized Dropdown Component
 const CustomDropdown = memo(({ placeholder, options, selected, setSelected, id, className = '' }: CustomDropdownProps) => {
@@ -339,7 +346,7 @@ const CustomDropdown = memo(({ placeholder, options, selected, setSelected, id, 
   );
 });
 
-
+CustomDropdown.displayName = "CustomDropdown";
 
 // Optimized InputGroup Component
 const InputGroup = memo(({ label, children, id }: InputGroupProps) => (
@@ -350,6 +357,7 @@ const InputGroup = memo(({ label, children, id }: InputGroupProps) => (
     {children}
   </motion.div>
 ));
+InputGroup.displayName = "InputGroup";
 
 // Profile Card Component
 const ProfileCard = memo(({ data, onCopy, isMobile }: { 
@@ -363,6 +371,7 @@ const ProfileCard = memo(({ data, onCopy, isMobile }: {
       <span className="text-sm text-green-400 font-medium">{data.status}</span>
     </>
   );
+  ProfileCard.displayName = "ProfileCard";
 
   if (isMobile) {
     return (
