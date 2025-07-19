@@ -130,7 +130,7 @@ const PortfolioAbout = () => {
                             type="button"
                             aria-label="Navigate to contacts section"
                           >
-                            Let's Connect
+                            Let&apos;s Connect
                           </button>
                         </div>
                       </div>
@@ -183,7 +183,7 @@ const PortfolioAbout = () => {
                 Favorite Tools
               </h3>
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {tools.map((tool, index) => (
+                {tools.map((tool) => (
                   <div 
                     key={tool.name} 
                     className="relative bg-white/5 hover:bg-white/10 border border-white/10 hover:border-blue-500/50 rounded-xl p-4 transition-all duration-200 hover:scale-105 cursor-pointer"
@@ -202,7 +202,7 @@ const PortfolioAbout = () => {
 
             {/* Fun Facts */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {stats.map((stat, index) => (
+              {stats.map((stat) => (
                 <div key={stat.label} className="bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10 text-center hover:bg-white/8 transition-all duration-200 hover:scale-105">
                   <div className="text-2xl mb-2">{stat.icon}</div>
                   <div className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent mb-2">

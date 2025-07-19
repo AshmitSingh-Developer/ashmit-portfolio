@@ -101,7 +101,7 @@ function Footer() {
             className="mb-2 relative left-0 sm:mb-4 lg:mb-6"
           />
           <div className="mb-2 sm:mr-3  lg::mb-6 flex items-center justify-center gap-4 md:justify-start">
-            {socialLinks.map((social, index) => (
+            {socialLinks.map((social) => (
               <motion.a
                 key={social.name}
                 href={social.url}

@@ -17,7 +17,7 @@ export default function SuggestPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.2 }}
       >
-        Let's Build Something Great
+        Let&apos;s Build Something Great
       </motion.h1>
 
       <motion.p
@@ -27,7 +27,7 @@ export default function SuggestPage() {
         transition={{ delay: 0.4 }}
       >
         I&apos;m passionate about creating fast, beautiful, and user-friendly websites.
-        Whether it's a portfolio, SaaS dashboard, or landing page &lsquo; I bring both design and code together to deliver value. Let&apos;s work together to turn your vision into reality.
+        Whether it&apos;s a portfolio, SaaS dashboard, or landing page &lsquo; I bring both design and code together to deliver value. Let&apos;s work together to turn your vision into reality.
       </motion.p>
 
       <motion.div

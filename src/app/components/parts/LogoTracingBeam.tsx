@@ -53,7 +53,7 @@ const AshmitSinghLogo: React.FC<AshmitSinghLogoProps> = ({
   },
 });
     }
-  }, [autoPlay]);
+  }, [autoPlay,controls,delay,duration]);
 
   return (
     <svg

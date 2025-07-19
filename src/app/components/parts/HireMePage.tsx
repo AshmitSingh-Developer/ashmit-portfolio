@@ -51,7 +51,7 @@ interface ProfileData {
 
 interface UseFormStateReturn {
   formData: FormData;
-  updateField: (field: keyof FormData, value: any) => void;
+  updateField: (field: keyof FormData, value: FormData[]) => void;
   reset: () => void;
   isSubmitting: boolean;
   setIsSubmitting: React.Dispatch<React.SetStateAction<boolean>>;
@@ -784,6 +784,7 @@ const HireMePage: React.FC = () => {
                     rows={11}
                   />
                 </InputGroup>
+                
               {/* Submit Button */}
               <SubmitButton isSubmitting={isSubmitting} />
                
@@ -791,6 +792,8 @@ const HireMePage: React.FC = () => {
             </motion.div>
           </div>
         </motion.div>
+
+        
 
         <div className="z-10 w-full">
           <Footer />
@@ -890,6 +893,7 @@ const HireMePage: React.FC = () => {
           min-height: 200px;
         }
       `}</style>
+      
 
       <AnimatePresence>
         {showToast && (
@@ -913,5 +917,13 @@ const HireMePage: React.FC = () => {
     </>
   );
 };
+
+
+SelectField.displayName = "SelectField";
+DatePickerField.displayName = "DatePickerField";
+TimePickerField.displayName = "TimePickerField";
+TextareaField.displayName = "TextareaField";
+SubmitButton.displayName = "SubmitButton";
+
 
 export default HireMePage;
