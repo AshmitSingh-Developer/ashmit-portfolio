@@ -5,7 +5,8 @@ import { FaXTwitter } from 'react-icons/fa6';
 import { MdOutlineEmail, MdPhone, MdLocationOn } from 'react-icons/md';
 import { motion, useInView } from 'framer-motion';
 
-import emailjs from 'emailjs-com';
+import emailjs from '@emailjs/browser';
+
 import { toast } from '@/lib/toast';
 
 import ContactHeader from './parts/ContactHeader';
