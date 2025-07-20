@@ -222,11 +222,11 @@ export async function POST(req: Request) {
     console.log('Email sent successfully:', response);
     console.log('Resend response:', response);
 
-    if (!response.id) {
-    console.warn('⚠️ Email not sent — likely because of invalid "from" address or unverified domain.');
+    if (!response.data?.id) {
+      console.warn('⚠️ Email not sent — likely because of invalid "from" address or unverified domain.');
     }
     
-    return NextResponse.json({ success: true, id: response?.id ?? null });
+    return NextResponse.json({ success: true, id: response?.data?.id ?? null });
     
     
 
