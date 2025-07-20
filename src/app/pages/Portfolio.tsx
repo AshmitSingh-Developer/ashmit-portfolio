@@ -10,7 +10,7 @@ import PortfolioBackgroundSpace from './PortfolioBG2';
 
 function Portfolio() {
 
-  const cSS1=" relative text-white  overflow-x-hidden  overflow-y-auto "
+  const cSS1=" relative text-white  overflow-x-hidden "
   return (
   <>
 

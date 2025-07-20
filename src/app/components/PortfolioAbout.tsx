@@ -103,6 +103,7 @@ const PortfolioAbout = () => {
                         {/* Image container */}
                         <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
                           <Image
+                            fill
                             src="/my-avatar2.png"
                             alt="Ashmit Singh"
                             className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
