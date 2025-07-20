@@ -27,7 +27,7 @@ export async function POST(req: Request) {
       console.error('Validation error:', parsed.error);
       return NextResponse.json({ 
         error: 'Invalid form data', 
-        details: parsed.error.errors 
+        details: parsed.error.issues 
       }, { status: 400 });
     }
 
