@@ -138,7 +138,7 @@ export default function AnimatedText({
     transformOrigin: 'center',
     transition: {
       duration: 1.2,
-      ease: [0.4, 0.0, 0.2, 1], // smooth, non-bouncy
+      ease: [0.4, 0.0, 0.2, 1] as const, // smooth, non-bouncy
       delay: 0.2
     }
   }
