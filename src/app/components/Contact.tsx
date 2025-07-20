@@ -9,7 +9,7 @@ import emailjs from '@emailjs/browser';
 
 import { toast } from '@/lib/toast';
 
-import ContactHeader from './parts/ContactHeader';
+import PageHeader from './parts/PageHeader';
 import IrisGateCard from './parts/ContactIrisGate'
 
 const todayDate = new Date().toDateString();
@@ -213,7 +213,12 @@ const Contact = () => {
       <div className="max-w-6xl mx-auto w-full">
         
         {/* Header Section */}
-        <ContactHeader/>
+       <div>
+        <PageHeader 
+        subtitle="Get in Touch" 
+        title="Contact Me" 
+      />
+       </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
           
