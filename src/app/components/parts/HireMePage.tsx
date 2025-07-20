@@ -281,12 +281,12 @@ SocialLinks.displayName = "SocialLinks";
 // Optimized Dropdown Component
 const CustomDropdown = memo(({ placeholder, options, selected, setSelected, id, className = '' }: CustomDropdownProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     if (!isOpen) return;
     const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+      if (dropdownRef.current && event.target && !dropdownRef.current.contains(event.target as Node)) {
         setIsOpen(false);
       }
     };
