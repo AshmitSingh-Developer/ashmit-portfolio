@@ -1,8 +1,14 @@
-import React, { useState, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useMemo,MutableRefObject } from 'react';
+import { motion, AnimatePresence,Variants } from 'framer-motion';
 
+type IrisGateCardProps = {
+  availableCardRef: MutableRefObject<HTMLDivElement | null>;
+  availableInView: boolean;
+  cardVariants: Variants;
+  itemVariants: Variants;
+};
 
-const IrisGateCard = ({ availableCardRef, availableInView, cardVariants, itemVariants }) => {
+const IrisGateCard = ({ availableCardRef, availableInView, cardVariants, itemVariants }:IrisGateCardProps) => {
   const [isOpening, setIsOpening] = useState(false);
 
   // Memoize particle positions for better performance

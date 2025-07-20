@@ -4,6 +4,12 @@ import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
 import AshmitSinghLogo from './LogoTracingBeam';
 
+type NavLink = {
+  name: string;
+  href: string;
+  target?: '_blank';
+};
+
 const footerVariants = {
   hidden: { opacity: 0 },
   visible: {
@@ -20,7 +26,7 @@ const itemVariants = {
     opacity: 1,
     y: 0,
     transition: {
-      type: 'spring',
+      type: 'spring' as const,
       stiffness: 100,
       damping: 15,
     },
@@ -32,7 +38,7 @@ const socialHover = {
   y: -4,
   boxShadow: '0px 4px 18px rgba(0, 255, 255, 0.15)',
   transition: {
-    type: 'spring',
+    type: 'spring' as const,
     stiffness: 250,
     damping: 18,
   },
@@ -48,7 +54,7 @@ function Footer() {
     { name: 'Email', icon: FaEnvelope, url: 'mailto:ashmit25092001singh@gmail.com', color: 'hover:text-white hover:bg-black/70' },
   ];
 
-  const navSections = [
+  const navSections: { title: string; links: NavLink[] }[] = [
     {
       title: 'Quick Links',
       links: [

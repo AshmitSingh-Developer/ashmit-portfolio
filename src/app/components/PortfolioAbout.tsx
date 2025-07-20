@@ -28,7 +28,7 @@ const PortfolioAbout = () => {
     { number: '∞', label: 'Cups of Coffee', icon: '☕' }
   ], []);
 
-  const handleConnectClick = useCallback((e) => {
+  const handleConnectClick = useCallback((e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     e.stopPropagation();
     const contactsSection = document.querySelector('#contacts');

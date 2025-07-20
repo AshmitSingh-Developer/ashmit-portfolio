@@ -51,7 +51,8 @@ interface ProfileData {
 
 interface UseFormStateReturn {
   formData: FormData;
-  updateField: (field: keyof FormData, value: FormData[]) => void;
+  updateField:  <K extends keyof FormData>(field: K, value: FormData[K]) => void;
+  handleSubmit: (e: React.FormEvent<HTMLFormElement>) => Promise<void>; // <- Add this
   reset: () => void;
   isSubmitting: boolean;
   setIsSubmitting: React.Dispatch<React.SetStateAction<boolean>>;
@@ -294,7 +295,7 @@ const CustomDropdown = memo(({ placeholder, options, selected, setSelected, id, 
   }, [isOpen]);
 
   const handleToggle = useCallback(() => setIsOpen(prev => !prev), []);
-  const handleSelect = useCallback((option) => {
+  const handleSelect = useCallback((option: string) => {
     setSelected(option);
     setIsOpen(false);
   }, [setSelected]);
@@ -487,7 +488,7 @@ const useFormState = (): UseFormStateReturn => {
   const [emailError, setEmailError] = useState('');
  
 
-const updateField = useCallback((field: keyof FormData, value: FormData[]) => {
+const updateField = useCallback( <K extends keyof FormData>(field: K, value: FormData[K]) => {
   setFormData(prev => ({ ...prev, [field]: value }));
 }, []);
 
@@ -610,7 +611,7 @@ useEffect(() => {
     }
   }, [formData, reset,emailStatus]);
 
-  return { formData, updateField, handleSubmit, isSubmitting, emailStatus, emailError };
+  return { formData, updateField, handleSubmit, isSubmitting, emailStatus, emailError,reset,setIsSubmitting };
 };
 
 // Main component
@@ -686,7 +687,7 @@ const HireMePage: React.FC = () => {
                     variants={ANIMATION_VARIANTS.item}
                     type="text"
                     value={formData.fullName}
-                    onChange={(e) => updateField('fullName', e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('fullName', e.target.value)}
                     placeholder="Enter your full name"
                     className={INPUT_STYLE}
                     required
@@ -699,7 +700,7 @@ const HireMePage: React.FC = () => {
                     variants={ANIMATION_VARIANTS.item}
                     type="email"
                     value={formData.email}
-                    onChange={(e) => updateField('email', e.target.value)}
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateField('email', e.target.value)}
                     placeholder="Enter your email address"
                     className={INPUT_STYLE}
                     required

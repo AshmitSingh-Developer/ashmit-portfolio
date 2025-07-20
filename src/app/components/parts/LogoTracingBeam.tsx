@@ -82,7 +82,7 @@ const AshmitSinghLogo: React.FC<AshmitSinghLogoProps> = ({
       {letterKeys.slice(0, 6).map((letter, index) => (
         <g key={`${letter}-${index}`} transform={`translate(${index * 45 + 20}, 10)`}>
           <motion.path
-            d={letterPaths[letter]}
+            d={letterPaths[letter as keyof typeof letterPaths]}
             fill="none"
             stroke="#00fff7"
             strokeWidth={strokeWidth}
@@ -100,7 +100,7 @@ const AshmitSinghLogo: React.FC<AshmitSinghLogoProps> = ({
       {letterKeys.slice(6).map((letter, index) => (
         <g key={`${letter}-${index + 6}`} transform={`translate(${index * 45 + 320}, 10)`}>
           <motion.path
-            d={letterPaths[letter]}
+            d={letterPaths[letter as keyof typeof letterPaths]}
             fill="none"
             stroke="#00fff7"
             strokeWidth={strokeWidth}

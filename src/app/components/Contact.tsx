@@ -40,7 +40,7 @@ const Contact = () => {
   const socialInView = useInView(socialCardRef, { once: true, margin: "-50px" });
   const availableInView = useInView(availableCardRef, { once: true, margin: "-50px" });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
 
@@ -155,7 +155,7 @@ const Contact = () => {
       scale: 1,
       transition: {
         duration: 0.5,
-        ease: [0.25, 0.46, 0.45, 0.94], // Optimized easing
+        ease: [0.25, 0.46, 0.45, 0.94] as const, // Optimized easing
         staggerChildren: 0.05 // Reduced stagger
       },
     },
@@ -181,7 +181,7 @@ const Contact = () => {
       opacity: 0, 
       scale: 0.9
     },
-    visible: (i) => ({ 
+    visible: (i: number) => ({ 
       opacity: 1, 
       scale: 1,
       transition: { 
@@ -197,12 +197,12 @@ const Contact = () => {
       opacity: 0, 
       x: -20
     },
-    visible: (i) => ({ 
+    visible: (i: number) => ({ 
       opacity: 1, 
       x: 0,
       transition: { 
         duration: 0.4,
-        ease: [0.25, 0.46, 0.45, 0.94],
+        ease: [0.25, 0.46, 0.45, 0.94] as const,
         delay: i * 0.1,
       }
     })
