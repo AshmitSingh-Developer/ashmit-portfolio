@@ -5,6 +5,7 @@ const uri = process.env.MONGODB_URI;
 const options = {};
 
 if (!uri) {
+  console.log("ENV URI:", process.env.MONGODB_URI);
   throw new Error("❌ MongoDB URI not found in environment variables.");
 }
 
