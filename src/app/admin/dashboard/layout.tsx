@@ -19,7 +19,6 @@ import {
   FaSort,
   FaChartLine,
   FaUsers,
-  FaCalendarAlt,
   FaDownload
 } from 'react-icons/fa';
 import MyLogoutButton from '../components/LogoutBtn';
@@ -34,9 +33,7 @@ const navItems = [
   { href: '/admin/dashboard', icon: FaHome, label: 'Dashboard', badge: null },
   { href: '/admin/dashboard/projects', icon: FaProjectDiagram, label: 'Projects', badge: '12' },
   { href: '/admin/dashboard/messages', icon: FaEnvelope, label: 'Messages', badge: '5' },
-  { href: '/admin/dashboard/analytics', icon: FaChartLine, label: 'Analytics', badge: null },
-  { href: '/admin/dashboard/users', icon: FaUsers, label: 'Users', badge: '24' },
-  { href: '/admin/dashboard/calendar', icon: FaCalendarAlt, label: 'Calendar', badge: null },
+  { href: '/admin/dashboard/notifications', icon: FaChartLine, label: 'Notifications', badge: null },
 ];
 
 const quickActions = [

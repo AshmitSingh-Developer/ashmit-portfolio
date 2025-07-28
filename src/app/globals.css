@@ -113,6 +113,24 @@ html, body {
   
 }
 
+/* Neon glow for icons for admin/dashboard/notification */ 
+.glow-icon {
+  filter: drop-shadow(0 0 6px currentColor);
+}
+
+/* Border animation for hover */
+@keyframes glow-border {
+  0% {
+    box-shadow: 0 0 0px rgba(255, 255, 255, 0.08);
+  }
+  100% {
+    box-shadow: 0 0 30px rgba(255, 255, 255, 0.08);
+  }
+}
+
+.group-hover\\:animate-glow-border:hover {
+  animation: glow-border 0.8s forwards;
+}
 
 
 
