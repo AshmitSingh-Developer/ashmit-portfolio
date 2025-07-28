@@ -1,5 +1,5 @@
-import React, { useState, useMemo,MutableRefObject } from 'react';
-import { motion, AnimatePresence,Variants } from 'framer-motion';
+import React, { useState, useMemo, useCallback, MutableRefObject } from 'react';
+import { motion, AnimatePresence, Variants } from 'framer-motion';
 
 type IrisGateCardProps = {
   availableCardRef: MutableRefObject<HTMLDivElement | null>;
@@ -8,7 +8,7 @@ type IrisGateCardProps = {
   itemVariants: Variants;
 };
 
-const IrisGateCard = ({ availableCardRef, availableInView, cardVariants, itemVariants }:IrisGateCardProps) => {
+const IrisGateCard = ({ availableCardRef, availableInView, cardVariants, itemVariants }: IrisGateCardProps) => {
   const [isOpening, setIsOpening] = useState(false);
 
   // Memoize particle positions for better performance
@@ -37,14 +37,29 @@ const IrisGateCard = ({ availableCardRef, availableInView, cardVariants, itemVar
     })), []
   );
 
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     setIsOpening(true);
     
     setTimeout(() => {
       window.open('/hire-me', '_blank');
       setIsOpening(false);
     }, 2500);
-  };
+  }, []);
+
+  // Pre-calculate dimensions for better performance
+  const dimensions = useMemo(() => {
+    const vw = typeof window !== 'undefined' ? window.innerWidth : 800;
+    const vh = typeof window !== 'undefined' ? window.innerHeight : 600;
+    return {
+      outerRing: Math.min(vw * 0.8, 400),
+      middleRing: Math.min(vw * 0.6, 300),
+      centralPortal: Math.min(vw * 0.25, 120),
+      innerGlow: Math.min(vw * 0.2, 100),
+      progressRing: Math.min(vw * 0.7, 350),
+      particleDistance: Math.min(vw * 0.4, 300),
+      energyDistance: Math.min(vw * 0.3, 200)
+    };
+  }, []);
 
   return (
     <>
@@ -52,11 +67,12 @@ const IrisGateCard = ({ availableCardRef, availableInView, cardVariants, itemVar
       <motion.div
         ref={availableCardRef}
         className="
+         h-full w-full
           p-4 sm:p-6 rounded-xl sm:rounded-2xl shadow-2xl 
           bg-gradient-to-br from-blue-900/20 to-purple-900/15 
           backdrop-blur-lg border border-blue-400/20 text-center 
           hover:border-blue-400/40 cursor-pointer overflow-hidden relative
-          transition-colors duration-300 w-full max-w-sm mx-auto
+          transition-colors duration-300 
         "
         onClick={handleClick}
         initial="hidden"
@@ -97,7 +113,7 @@ const IrisGateCard = ({ availableCardRef, availableInView, cardVariants, itemVar
         >
           I am actively seeking new roles and collaborations.
         </motion.p>
-        <p className="text-[10px] text-cyan-600 mt-2  cursor-pointer">I’m ready to collaborate — tap to learn more</p>
+        <p className="text-[10px] text-cyan-600 mt-2  cursor-pointer">I'm ready to collaborate — tap to learn more</p>
       </motion.div>
 
       {/* Optimized Space Iris Gate Overlay */}
@@ -106,7 +122,10 @@ const IrisGateCard = ({ availableCardRef, availableInView, cardVariants, itemVar
           <motion.div
             className="fixed inset-0 z-[9999] flex items-center justify-center overflow-hidden"
             style={{
-              background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #581c87 100%)'
+              background: 'linear-gradient(135deg, #0f172a 0%, #1e1b4b 50%, #581c87 100%)',
+              willChange: 'transform, opacity',
+              backfaceVisibility: 'hidden',
+              perspective: 1000
             }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -124,7 +143,10 @@ const IrisGateCard = ({ availableCardRef, availableInView, cardVariants, itemVar
                   width: `${star.size}px`,
                   height: `${star.size}px`,
                   filter: 'blur(0.3px)',
-                  boxShadow: '0 0 2px rgba(255, 255, 255, 0.6)'
+                  boxShadow: '0 0 2px rgba(255, 255, 255, 0.6)',
+                  willChange: 'transform, opacity',
+                  backfaceVisibility: 'hidden',
+                  transform: 'translateZ(0)'
                 }}
                 initial={{ opacity: 0, scale: 0 }}
                 animate={{ 
@@ -145,10 +167,13 @@ const IrisGateCard = ({ availableCardRef, availableInView, cardVariants, itemVar
             <motion.div
               className="absolute rounded-full border-2 border-indigo-400/30"
               style={{
-                width: 'min(80vw, 400px)',
-                height: 'min(80vw, 400px)',
+                width: `${dimensions.outerRing}px`,
+                height: `${dimensions.outerRing}px`,
                 background: 'conic-gradient(from 0deg, transparent, rgba(99, 102, 241, 0.2), transparent)',
-                filter: 'blur(1px)'
+                filter: 'blur(1px)',
+                willChange: 'transform, opacity',
+                backfaceVisibility: 'hidden',
+                transform: 'translateZ(0)'
               }}
               initial={{ scale: 0, rotate: 0, opacity: 0 }}
               animate={{ 
@@ -167,10 +192,13 @@ const IrisGateCard = ({ availableCardRef, availableInView, cardVariants, itemVar
             <motion.div
               className="absolute rounded-full border-2"
               style={{
-                width: 'min(60vw, 300px)',
-                height: 'min(60vw, 300px)',
+                width: `${dimensions.middleRing}px`,
+                height: `${dimensions.middleRing}px`,
                 background: 'conic-gradient(from 0deg, transparent, rgba(139, 92, 246, 0.3), rgba(59, 130, 246, 0.2), transparent)',
-                filter: 'blur(1px)'
+                filter: 'blur(1px)',
+                willChange: 'transform, opacity',
+                backfaceVisibility: 'hidden',
+                transform: 'translateZ(0)'
               }}
               initial={{ scale: 0, rotate: 0 }}
               animate={{ 
@@ -201,7 +229,9 @@ const IrisGateCard = ({ availableCardRef, availableInView, cardVariants, itemVar
                   clipPath: `polygon(50% 50%, ${48 + i * 2}% 0%, ${52 + i * 2}% 0%)`,
                   transformOrigin: 'center center',
                   transform: `rotate(${i * 30}deg)`,
-                  willChange: 'transform, opacity'
+                  willChange: 'transform, opacity',
+                  backfaceVisibility: 'hidden',
+                  contain: 'layout style paint'
                 }}
                 initial={{ 
                   scale: 0,
@@ -225,11 +255,13 @@ const IrisGateCard = ({ availableCardRef, availableInView, cardVariants, itemVar
             <motion.div
               className="absolute rounded-full"
               style={{
-                width: 'min(25vw, 120px)',
-                height: 'min(25vw, 120px)',
+                width: `${dimensions.centralPortal}px`,
+                height: `${dimensions.centralPortal}px`,
                 background: 'radial-gradient(circle, rgba(56, 189, 248, 0.8) 0%, rgba(139, 92, 246, 0.6) 50%, rgba(30, 41, 59, 0.9) 100%)',
                 boxShadow: '0 0 60px rgba(56, 189, 248, 0.4)',
-                willChange: 'transform, opacity'
+                willChange: 'transform, opacity',
+                backfaceVisibility: 'hidden',
+                transform: 'translateZ(0)'
               }}
               initial={{ 
                 scale: 0,
@@ -252,11 +284,13 @@ const IrisGateCard = ({ availableCardRef, availableInView, cardVariants, itemVar
             <motion.div
               className="absolute rounded-full"
               style={{
-                width: 'min(20vw, 100px)',
-                height: 'min(20vw, 100px)',
+                width: `${dimensions.innerGlow}px`,
+                height: `${dimensions.innerGlow}px`,
                 background: 'radial-gradient(circle, rgba(255, 255, 255, 0.9) 0%, rgba(56, 189, 248, 0.6) 50%, transparent 100%)',
                 filter: 'blur(2px)',
-                willChange: 'transform, opacity'
+                willChange: 'transform, opacity',
+                backfaceVisibility: 'hidden',
+                transform: 'translateZ(0)'
               }}
               initial={{ 
                 scale: 0,
@@ -283,7 +317,9 @@ const IrisGateCard = ({ availableCardRef, availableInView, cardVariants, itemVar
                   left: '50%',
                   top: '50%',
                   boxShadow: `0 0 4px ${particle.color}`,
-                  willChange: 'transform, opacity'
+                  willChange: 'transform, opacity',
+                  backfaceVisibility: 'hidden',
+                  transform: 'translateZ(0)'
                 }}
                 initial={{ 
                   scale: 0,
@@ -296,12 +332,12 @@ const IrisGateCard = ({ availableCardRef, availableInView, cardVariants, itemVar
                   x: [
                     0,
                     Math.cos(particle.angle * Math.PI / 180) * 80,
-                    Math.cos(particle.angle * Math.PI / 180) * Math.min(window.innerWidth * 0.4, 300)
+                    Math.cos(particle.angle * Math.PI / 180) * dimensions.particleDistance
                   ],
                   y: [
                     0,
                     Math.sin(particle.angle * Math.PI / 180) * 80,
-                    Math.sin(particle.angle * Math.PI / 180) * Math.min(window.innerHeight * 0.4, 300)
+                    Math.sin(particle.angle * Math.PI / 180) * dimensions.particleDistance
                   ],
                   opacity: [0, 1, 0.8, 0]
                 }}
@@ -324,7 +360,9 @@ const IrisGateCard = ({ availableCardRef, availableInView, cardVariants, itemVar
                   top: '50%',
                   filter: 'blur(0.3px)',
                   boxShadow: `0 0 4px ${energy.color}`,
-                  willChange: 'transform, opacity'
+                  willChange: 'transform, opacity',
+                  backfaceVisibility: 'hidden',
+                  transform: 'translateZ(0)'
                 }}
                 initial={{ 
                   scale: 0,
@@ -334,8 +372,8 @@ const IrisGateCard = ({ availableCardRef, availableInView, cardVariants, itemVar
                 }}
                 animate={{
                   scale: [0, 1, 0],
-                  x: Math.cos(energy.angle * Math.PI / 180) * Math.min(window.innerWidth * 0.3, 200),
-                  y: Math.sin(energy.angle * Math.PI / 180) * Math.min(window.innerHeight * 0.3, 200),
+                  x: Math.cos(energy.angle * Math.PI / 180) * dimensions.energyDistance,
+                  y: Math.sin(energy.angle * Math.PI / 180) * dimensions.energyDistance,
                   opacity: [0, 1, 0]
                 }}
                 transition={{
@@ -349,6 +387,11 @@ const IrisGateCard = ({ availableCardRef, availableInView, cardVariants, itemVar
             {/* Responsive Status Text */}
             <motion.div
               className="absolute text-center z-10 px-4"
+              style={{
+                willChange: 'transform, opacity',
+                backfaceVisibility: 'hidden',
+                transform: 'translateZ(0)'
+              }}
               initial={{ opacity: 0, y: 30, scale: 0.8 }}
               animate={{ 
                 opacity: [0, 1, 1, 0], 
@@ -376,11 +419,14 @@ const IrisGateCard = ({ availableCardRef, availableInView, cardVariants, itemVar
             <motion.div
               className="absolute rounded-full border-2 border-transparent"
               style={{
-                width: 'min(70vw, 350px)',
-                height: 'min(70vw, 350px)',
+                width: `${dimensions.progressRing}px`,
+                height: `${dimensions.progressRing}px`,
                 background: 'conic-gradient(from 0deg, transparent, rgba(56, 189, 248, 0.6), transparent)',
-                mask: `radial-gradient(circle, transparent calc(min(35vw, 175px) - 4px), black calc(min(35vw, 175px) - 2px), black calc(min(35vw, 175px) + 2px), transparent calc(min(35vw, 175px) + 4px))`,
-                filter: 'blur(0.5px)'
+                mask: `radial-gradient(circle, transparent ${dimensions.progressRing/2 - 4}px, black ${dimensions.progressRing/2 - 2}px, black ${dimensions.progressRing/2 + 2}px, transparent ${dimensions.progressRing/2 + 4}px)`,
+                filter: 'blur(0.5px)',
+                willChange: 'transform, opacity',
+                backfaceVisibility: 'hidden',
+                transform: 'translateZ(0)'
               }}
               initial={{ rotate: 0, opacity: 0 }}
               animate={{ 

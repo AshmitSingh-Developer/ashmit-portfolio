@@ -7,7 +7,7 @@ import { motion, useInView } from 'framer-motion';
 
 import emailjs from '@emailjs/browser';
 
-import { toast } from '@/lib/toast';
+import { toast } from '@/components/important/toast';
 
 import PageHeader from './parts/PageHeader';
 import IrisGateCard from './parts/ContactIrisGate'
@@ -50,41 +50,24 @@ const Contact = () => {
   };
 
   // Debounced email validation
-  useEffect(() => {
-    const timer = setTimeout(async () => {
-      const email = formData.email.trim();
-      if (!email) return;
+useEffect(() => {
+  const timer = setTimeout(() => {
+    const email = formData.email.trim();
+    if (!email) return;
 
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        setEmailStatus('invalid');
-        setEmailError('Please enter a valid email format.');
-        return;
-      }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setEmailStatus('invalid');
+      setEmailError('Please enter a valid email format.');
+    } else {
+      setEmailStatus('valid');
+      setEmailError('');
+    }
+  }, 500);
 
-      try {
-        setEmailStatus('validating');
-        const res = await fetch(
-          `https://emailvalidation.abstractapi.com/v1/?api_key=a8173eb2d8f2478e9ee9c5e3314947bb&email=${encodeURIComponent(email)}`
-        );
-        const data = await res.json();
+  return () => clearTimeout(timer);
+}, [formData.email]);
 
-        if (data.deliverability !== 'DELIVERABLE' || data.is_disposable_email?.value) {
-          setEmailStatus('invalid');
-          setEmailError("Your email doesn't look right. Please enter a valid one.");
-        } else {
-          setEmailStatus('valid');
-          setEmailError('');
-        }
-      } catch (err) {
-        console.error('Email validation API failed:', err);
-        setEmailStatus('valid');
-        setEmailError('');
-      }
-    }, 800); // Increased debounce time
-
-    return () => clearTimeout(timer);
-  }, [formData.email]);
 
   const handleSubmit = async () => {
     const { name, email, subject, message } = formData;
@@ -108,7 +91,7 @@ const Contact = () => {
       return;
     }
     if (!message.trim()) {
-      toast.error('Don’t forget to write your message.');
+      toast.error("Don&apos;t forget to write your message.");
       return;
     }
     if (emailStatus === 'invalid') {
@@ -209,14 +192,19 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="w-full min-h-screen flex items-center justify-center py-16 px-6 sm:px-12 md:px-20 lg:px-24 bg-gradient-to-br from-gray-950 via-gray-900 to-black text-white">
+    <section id="contact" className="w-full min-h-screen flex items-center justify-center py-16 px-6 sm:px-12 md:px-20 lg:px-24  text-white">
       <div className="max-w-6xl mx-auto w-full">
         
         {/* Header Section */}
        <div>
         <PageHeader 
-        subtitle="Get in Touch" 
-        title="Contact Me" 
+        subtitle="Have questions or ideas? Let's talk!" 
+        title="Get in Touch &ndash; " 
+        titleAddon={
+          <span className="">
+            Let's Connect
+          </span>
+         }
       />
        </div>
 
@@ -424,7 +412,7 @@ const Contact = () => {
                 Follow Me
               </motion.h4>
               {/* Social links */}
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-2 gap-4">
                 {[
                   { icon: FaLinkedinIn, label: "LinkedIn", color: "from-blue-500 to-blue-600", glowColor: "shadow-blue-500/50" },
                   { icon: FaGithub, label: "GitHub", color: "from-gray-600 to-gray-700", glowColor: "shadow-gray-400/50" },
@@ -511,12 +499,14 @@ const Contact = () => {
             </motion.div>
 
             {/* Available Card */}
-            <IrisGateCard 
-              availableCardRef={availableCardRef}
-              availableInView={availableInView}
-              cardVariants={cardVariants}
-              itemVariants={itemVariants}
-            />
+            <div className=' w-full '>
+              <IrisGateCard 
+                availableCardRef={availableCardRef}
+                availableInView={availableInView}
+                cardVariants={cardVariants}
+                itemVariants={itemVariants}
+              />
+            </div>
             {/* <motion.div 
               ref={availableCardRef}
               className="p-6 rounded-2xl shadow-2xl bg-gradient-to-br from-green-500/5 to-emerald-500/5 backdrop-blur-lg border border-green-400/20 text-center hover:border-green-400/40 transition-colors duration-300"

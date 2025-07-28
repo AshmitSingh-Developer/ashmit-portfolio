@@ -1,5 +1,5 @@
 import React from 'react'
-import Logo from '../styles/Logo'
+import Logo from './LogoName'
 
 const PagesNavbar = () => {
   return (

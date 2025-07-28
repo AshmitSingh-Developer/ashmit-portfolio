@@ -1,14 +1,14 @@
 'use client';
 import React, { useState, useRef, useEffect, useCallback, memo } from 'react';
-import Footer from './PortfolioFooter';
+import Footer from '../../../components/important/PortfolioFooter';
 import { motion, AnimatePresence } from 'framer-motion';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import SpaceBackground from './HireMePageBG';
-import Navbar from '../PagesNavbar';
+import Navbar from '../../../components/important/PagesNavbar';
 import Image from 'next/image';
 
-import { toast } from '@/lib/toast';
+import { toast } from '@/components/important/toast';
 
 // For CustomDropdown component
 interface CustomDropdownProps {
@@ -104,7 +104,7 @@ const ANIMATION_VARIANTS = {
 
 const FORM_OPTIONS = {
   communication: ['Email', 'Phone Call', 'Video Call', 'Text Message'],
-  time: ['Morning (9 AM - 12 PM)', 'Afternoon (12 PM - 5 PM)', 'Evening (5 PM - 8 PM)', 'Anytime (9 PM - 11 PM)'],
+  time: ['Morning (9 AM - 12 PM)', 'Afternoon (12 PM - 5 PM)', 'Evening (5 PM - 8 PM)', 'Night (9 PM - 11 PM)'],
 };
 
 const INPUT_STYLE = "w-full px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-cyan-400/60 focus:ring-2 focus:ring-cyan-400/20 transition-all duration-200";
@@ -580,8 +580,8 @@ useEffect(() => {
     setIsSubmitting(true);
 
     try {
-      console.log('Submitting form data:', formData); // Debug log
-      console.log('Message value:', formData.message, typeof formData.message);
+      // console.log('Submitting form data:', formData); // Debug log
+      // console.log('Message value:', formData.message, typeof formData.message);  // Debug log
       
       const res = await fetch('/api/send', {
         method: 'POST',
@@ -593,10 +593,11 @@ useEffect(() => {
       });
 
       const result = await res.json();
-      console.log('Server response:', result); // Debug log
+      // console.log('📨 Server response:', result); // Debug log
 
       if (!res.ok) {
-        throw new Error(result.error || `Server error: ${res.status}`);
+      const errorMessage = result?.error?.[0]?.message || result?.error || `Server error: ${res.status}`;
+      throw new Error(errorMessage);
       }
 
       toast.success("Message sent successfully!");
@@ -604,11 +605,11 @@ useEffect(() => {
       
     } catch (err) {
       const error = err as Error;
-      console.error('Submission error:', error);
+      console.error('Submission error:', error); // Debug log
       toast.error(error.message || "Failed to send message. Please try again.");
     } finally {
       setIsSubmitting(false);
-    }
+    }1
   }, [formData, reset,emailStatus]);
 
   return { formData, updateField, handleSubmit, isSubmitting, emailStatus, emailError,reset,setIsSubmitting };

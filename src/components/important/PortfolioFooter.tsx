@@ -1,8 +1,10 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FaGithub, FaLinkedin, FaEnvelope } from 'react-icons/fa';
+import { FaGithub, FaLinkedin, FaEnvelope,FaInstagram } from 'react-icons/fa';
 import { FaXTwitter } from 'react-icons/fa6';
-import AshmitSinghLogo from './LogoTracingBeam';
+import AshmitSinghLogo from '../../app/components/parts/LogoTracingBeam';
+import BrandLogo from '@/components/important/LogoIcon';
+import Link from 'next/link';
 
 type NavLink = {
   name: string;
@@ -49,34 +51,35 @@ function Footer() {
 
   const socialLinks = [
     { name: 'GitHub', icon: FaGithub, url: 'https://github.com/', color: 'hover:text-white hover:bg-black/70' },
-    { name: 'LinkedIn', icon: FaLinkedin, url: 'https://linkedin.com/in/ashmit-singh-dev', color: 'hover:text-white hover:bg-black/70' },
-    { name: 'Twitter', icon: FaXTwitter, url: 'https://twitter.com/ashmit_dev', color: 'hover:text-white hover:bg-black/70' },
+    { name: 'LinkedIn', icon: FaLinkedin, url: 'https://linkedin.com/in/', color: 'hover:text-white hover:bg-black/70' },
+    { name: 'Twitter', icon: FaXTwitter, url: 'https://twitter.com/', color: 'hover:text-white hover:bg-black/70' },
     { name: 'Email', icon: FaEnvelope, url: 'mailto:ashmit25092001singh@gmail.com', color: 'hover:text-white hover:bg-black/70' },
+    { name: 'Instagram', icon: FaInstagram, url: 'https://www.instagram.com/', color: 'hover:text-white hover:bg-black/70' },
   ];
 
   const navSections: { title: string; links: NavLink[] }[] = [
     {
-      title: 'Quick Links',
+      title: 'General',
       links: [
-        { name: 'Home', href: '#home' },
-        { name: 'About', href: '#about' },
-        { name: 'Projects', href: '#projects' },
-        { name: 'Skills', href: '#skills' },
-        { name: 'Contact', href: '#contact' },
+        { name: 'Home', href: '/#home' },
+        { name: 'About', href: '/#about' },
+        { name: 'Projects', href: '/#projects' },
+        { name: 'Skills', href: '/#mySkills' },
+        { name: 'Contact', href: '/#contacts' },
       ],
     },
     {
       title: 'More',
       links: [
         { name: 'Hire Me', href: '/hire-me', target: '_blank' },
-        { name: 'Suggestion Page', href: '/suggestion-page', target: '_blank' },
+        { name: 'Suggestion', href: '/suggestion-page', target: '_blank' },
       ],
     },
     {
       title: 'Friends',
       links: [
-        { name: 'Portfolio Ayush', href: 'https://mega-project-pink.vercel.app/', target: '_blank' },
-        { name: 'Contact Ayush', href: 'https://mega-project-pink.vercel.app/hire-me', target: '_blank' },
+        { name: ' Ayush.dev', href: 'https://mega-project-pink.vercel.app/', target: '_blank' },
+        { name: 'Reach Ayush ', href: 'https://mega-project-pink.vercel.app/hire-me', target: '_blank' },
       ],
     },
   ];
@@ -90,23 +93,33 @@ function Footer() {
       variants={footerVariants}
     >
       <motion.hr
-        className="mb-8 mt-6 h-[1px] w-full border-none bg-gradient-to-r from-zinc-800/80 via-zinc-600/50 to-zinc-800/80"
+        className="mb-6 mt-6 h-[1px] w-full border-none bg-gradient-to-r from-zinc-800/80 via-zinc-600/50 to-zinc-800/80"
         variants={itemVariants}
       />
 
       <div className="mx-auto    flex max-w-6xl flex-col items-center justify-center gap-8 text-center md:flex-row md:items-start md:justify-between md:gap-16 md:text-left">
         <motion.div
-          className="flex w-full flex-col sm:flex-row md:flex-col items-center justify-between md:w-auto md:items-start"
+          className="flex w-full flex-col  sm:flex-row md:flex-col items-center justify-between md:w-auto md:items-start"
           variants={itemVariants}
         >
-          <AshmitSinghLogo
-            width={230}
-            height={55}
+          <div className='flex items-center  mb-2 sm:mb-4 lg:mb-6'>
+            <Link
+            href="/admin/login"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block rounded-md mt-1 p-2 shadow-[0_4px_20px_rgba(0,255,180,0.3)] backdrop-blur-sm transition-all duration-300 ease-in-out hover:shadow-[0_6px_30px_rgba(0,255,180,0.45)]"
+            >
+            <BrandLogo/>
+            </Link>
+            <AshmitSinghLogo
+            width={250}
+            height={70}
             strokeWidth={1.8}
             duration={6}
-            className="mb-2 relative left-0 sm:mb-4 lg:mb-6"
+            className=" ml-1 "
           />
-          <div className="mb-2 sm:mr-3  lg::mb-6 flex items-center justify-center gap-4 md:justify-start">
+          </div>
+          <div className="mb-2 sm:mr-3 ml-[10px] sm:ml-0  lg::mb-6 flex items-center justify-center gap-4 md:justify-start">
             {socialLinks.map((social) => (
               <motion.a
                 key={social.name}
@@ -125,16 +138,16 @@ function Footer() {
         </motion.div>
 
         <motion.div
-          className="grid w-full grid-cols-2 items-start gap-8 text-center md:w-auto sm:grid-cols-3 sm:text-left"
+          className="grid w-full grid-cols-3 items-start gap-9 md:gap-10  pl-1  md:w-auto  text-left"
           variants={footerVariants}
         >
           {navSections.map((section) => (
             <motion.div
               key={section.title}
-              className="unselectable mb-8 text-center md:mb-0 md:text-left"
+              className="unselectable mb-3  md:mb-0 text-left"
               variants={itemVariants}
             >
-              <h3 className="mb-4 text-lg font-semibold text-zinc-200">{section.title}</h3>
+              <h3 className="mb-4 text-[16px] font-Avertastd font-bold  text-zinc-200">{section.title}</h3>
               <ul className="space-y-2">
                 {section.links.map((link) => (
                   <li key={link.name}>
@@ -142,7 +155,7 @@ function Footer() {
                       href={link.href}
                       target={link.target}
                       rel={link.target ? 'noopener noreferrer' : undefined}
-                      className="text-zinc-400 transition-colors duration-200 hover:text-cyan-500"
+                      className= "link-hover-underline text-sm text-[#D1D5DC] transition-colors duration-200 hover:text-cyan-500"
                     >
                       {link.name}
                     </a>
@@ -163,7 +176,7 @@ function Footer() {
           Copyright © {currentYear} Ashmit Singh. All rights reserved.
         </p>
         <p className="mt-2 text-xs text-zinc-500 sm:text-sm">
-          Built with Next.js
+          Built with Next.js 
         </p>
       </motion.div>
     </motion.footer>

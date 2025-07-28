@@ -1,15 +1,17 @@
 'use client';
 import { ReactNode, MouseEventHandler } from 'react';
 import React, { useState } from 'react';
-import ContactLinks from '../pages/ContactLinks';
+import Link from 'next/link';
+import MobileContactLinks from './parts/ContactLinks';
+import Logo from '../../components/important/LogoName';
+import { AnimatePresence, motion } from 'framer-motion';
+
 import { Button } from '@/components/ui/button';
 import { AiOutlineMenuUnfold } from "react-icons/ai";
 import { LuLogOut } from "react-icons/lu";
 import { BsArrowUpRight } from "react-icons/bs";
-import { AnimatePresence, motion } from 'framer-motion';
-import Logo from '../styles/Logo';
-import Link from 'next/link';
 import HireMeButton from './parts/HireMeBtn';
+
 
 interface NavLinkProps{
   href: string;
@@ -35,6 +37,7 @@ const NavLink = ({ href, children, onClick }:NavLinkProps) => {
 
 const PortfolioNavbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -82,7 +85,7 @@ const PortfolioNavbar = () => {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={closeMenu}
-              className="fixed inset-0 z-40 bg-black/30 sm:hidden"
+              className="fixed inset-0 z-30 bg-black/30 sm:hidden"
             />
             <motion.nav
               initial={{ opacity: 0, x: -300 ,scale: 0.7 }}
@@ -98,7 +101,7 @@ const PortfolioNavbar = () => {
                   duration:0.2
                 }
                }}
-              className="fixed h-screen shadow-xl left-0 top-12 z-40 w-full px-4 pb-3 sm:hidden backdrop-blur-sm bg-none"
+              className="fixed h-screen overflow-y-scroll shadow-xl left-0 top-0 z-30 w-full pt-11 px-4 pb-3 bg-black/55 sm:hidden backdrop-blur-2xl bg-none"
             >
               <div className="flex flex-col font-NeueMachina gap-2">
                 {NAVIGATION_ITEMS.map(({ href, label }) => (
@@ -124,7 +127,7 @@ const PortfolioNavbar = () => {
                 }}
                  className="border-main-col/50" />
               </div>
-              <ContactLinks />
+              <MobileContactLinks />
               <div className='flex flex-col mt-4 gap-4'>
                 <div className=''>
                   <motion.hr
@@ -153,15 +156,15 @@ const PortfolioNavbar = () => {
                     delay:0.6,
                   }
                 }}
-                className='w-full' onClick={closeMenu}>
-                  <div className='mx-3 mt-3'>
+                className='w-full ' onClick={closeMenu}>
+                  <div className='mx-3 z-50 mt-3'>
                     <Button asChild className="w-fit">
                       <a download className='font-Helvetica' href='/Resume.pdf' target="_blank" rel="noopener noreferrer">
                         Resume <span className='ml-[6px]'><BsArrowUpRight /></span>
                       </a>
                     </Button>
                   </div>
-                  <div className='mx-3 mt-3'>
+                  <div className='mx-3 z-50  mt-3'>
                     <HireMeButton />
                   </div>
                 </motion.div>

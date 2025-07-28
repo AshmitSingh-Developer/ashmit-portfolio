@@ -17,7 +17,22 @@ html, body {
   min-height: 100vh;
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;     /* Firefox */
+   -webkit-font-smoothing: antialiased;
 
+}
+
+/*  */
+.animate-spin-slow {
+  animation: spin 20s linear infinite;
+}
+.animate-spin-fast {
+  animation: spin 110ms linear infinite;
+}
+
+/* text selection */
+::selection {
+  background-color: rgba(34, 211, 238, 0.2); /* Light cyan */
+  color: #67e8f9; /* Soft aqua */
 }
 
 ::-webkit-scrollbar {
@@ -34,6 +49,74 @@ html, body {
   padding: 24px;
    /* bg-[#030712] rounded-lg p-6 border border-gray-600/20 */
 }
+
+/* Animated Gradient Text */
+.text-colorfull {
+  background: linear-gradient(
+   288deg, #ff8000, #f0c 53.2394%, #04f);
+  background-size: 300% 300%;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.animate-gradient-x {
+  animation: animate-gradient-x 6s ease-in-out infinite;
+}
+
+.font-nyght {
+  font-family: 'Nyght Serif', serif;
+}
+
+@keyframes animate-gradient-x {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Add in globals.css or tailwind base layer */
+/* Add in globals.css or tailwind base layer */
+@layer utilities {
+  .link-hover-underline {
+    position: relative;
+    transition: color 0.3s ease;
+  }
+
+  .link-hover-underline::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1px;
+    width: 100%;
+    background: linear-gradient(90deg, #22d3ee, #6366f1, #ec4899);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s ease-in-out;
+  }
+
+  .link-hover-underline:hover::after {
+    transform: scaleX(1);
+  }
+
+  .link-hover-underline:hover {
+    color: #fff !important;
+  }
+
+  
+}
+
+
+
+
+
 
 @theme {
   --color-main-col: #24CFA6;
@@ -64,6 +147,24 @@ html, body {
   font-style: normal;
 }
 @font-face {
+  font-family: 'Nyght Serif';
+  src: url('/fonts/NyghtSerif-RegularItalic.ttf') format('truetype'); /* Adjust path & format as needed */
+  font-weight: 400;
+  font-style: italic;
+}
+@font-face {
+  font-family: 'Nyght Serif';
+  src: url('/fonts/NyghtSerif-Regular.ttf') format('truetype'); /* Adjust path & format as needed */
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Nyght Serif';
+  src: url('/fonts/NyghtSerif-Bold.ttf') format('truetype'); /* Adjust path & format as needed */
+  font-weight: 700;
+  font-style: normal;
+}
+@font-face {
   font-family: 'NeueMachina-Regular';
   src: url('/fonts/NeueMachina-Regular.otf') format('truetype'); /* Adjust path & format as needed */
   font-weight: normal;
@@ -77,6 +178,9 @@ html, body {
 }
 .font-NeueMachina {
   font-family: 'NeueMachina-Regular', sans-serif; /* Fallbacks optional */
+}
+.font-nyght {
+  font-family: 'Nyght Serif', serif;
 }
 
 .unselectable {

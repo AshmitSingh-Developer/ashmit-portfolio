@@ -1,12 +1,11 @@
 'use client';
-import { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useRef } from 'react';
+import PortfolioBackground from './PortfolioBackground';
 
 const TOTAL_STARS = 400;
 
 const SpaceBackground = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [mouse, setMouse] = useState({ x: 0, y: 0 });
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -96,7 +95,7 @@ const SpaceBackground = () => {
     };
 
     animate();
-    canvas.style.opacity = '1'; // 👈 prevent gradient flash
+    canvas.style.opacity = '1';
 
     const handleResize = () => {
       width = window.innerWidth;
@@ -119,61 +118,17 @@ const SpaceBackground = () => {
     };
   }, []);
 
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMouse({ x: e.clientX, y: e.clientY });
-    };
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
   return (
-    <div className="absolute inset-0 z-[-10] overflow-hidden bg-black">
-      {/* Canvas with hidden until ready */}
-      <canvas
-        ref={canvasRef}
-        className="top-0 left-0 absolute bg-gradient-to-b from-black via-gray-900 to-black transition-opacity duration-500"
-        style={{ opacity: 0 }}
-      />
-
-      {/* Moon */}
-      <motion.div
-        className="absolute z-1 w-[160px] h-[160px] pointer-events-none"
-        style={{
-          left: mouse.x - 80,
-          top: mouse.y - 80,
-          position: 'absolute',
-        }}
-      >
-        {/* <Image
-          src="/myimg/moon.png"
-          fill
-          alt="Moon"
-          className="w-full h-full object-contain select-none"
-          priority
-        /> */}
-        <motion.div
-          className="absolute inset-0 rounded-full z-[-1]"
-          style={{
-            background: 'radial-gradient(circle, rgba(255,255,255,0.12), transparent 80%)',
-          }}
-          animate={{
-            scale: [1, 1.1, 1],
-            opacity: [0.5, 0.8, 0.5],
-            boxShadow: [
-              '0 0 40px rgba(255,255,255,0.2)',
-              '0 0 80px rgba(255,255,255,0.3)',
-              '0 0 40px rgba(255,255,255,0.2)',
-            ],
-          }}
-          transition={{
-            duration: 10,
-            ease: 'easeInOut',
-            repeat: Infinity,
-          }}
+   <>
+      <div className="absolute inset-0 z-[-10] overflow-hidden bg-black">
+        <canvas
+          ref={canvasRef}
+          className="top-0 left-0 absolute bg-gradient-to-b from-black via-gray-900 to-black transition-opacity duration-500"
+          style={{ opacity: 0 }}
         />
-      </motion.div>
-    </div>
+      </div>
+      <PortfolioBackground/>
+   </>
   );
 };
 

@@ -1,16 +1,29 @@
 'use client';
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import Image from 'next/image';
+import PageHeader from './parts/PageHeader';
+import DescriptionCard from '@/components/important/EnhancedDescriptionCard'
 
 const PortfolioAbout = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [activeSkill, setActiveSkill] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+  const [isTapped, setIsTapped] = useState(false);
+
+  useEffect(() => {
+    const updateDevice = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    updateDevice();
+    window.addEventListener('resize', updateDevice);
+    return () => window.removeEventListener('resize', updateDevice);
+  }, []);
 
   const skills = useMemo(() => [
     { name: 'Frontend Development', level: 95, color: 'from-blue-500 to-purple-600' },
-    { name: 'Backend Development', level: 88, color: 'from-green-500 to-teal-600' },
+    { name: 'Backend Development', level: 40, color: 'from-green-500 to-teal-600' },
     { name: 'UI/UX Design', level: 82, color: 'from-pink-500 to-rose-600' },
-    { name: 'Mobile Development', level: 75, color: 'from-orange-500 to-red-600' }
+    { name: 'Mobile Development', level: 0, color: 'from-orange-500 to-red-600' }
   ], []);
 
   const tools = useMemo(() => [
@@ -23,8 +36,8 @@ const PortfolioAbout = () => {
   ], []);
 
   const stats = useMemo(() => [
-    { number: '50+', label: 'Projects Completed', icon: '🚀' },
-    { number: '3+', label: 'Years Experience', icon: '⏰' },
+    { number: '2+', label: 'Projects Completed', icon: '🚀' },
+    { number: '3+', label: 'Months Experience', icon: '⏰' },
     { number: '∞', label: 'Cups of Coffee', icon: '☕' }
   ], []);
 
@@ -54,22 +67,22 @@ const PortfolioAbout = () => {
   }, [skills.length]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 text-white relative overflow-hidden">
-      {/* Optimized background elements - reduced blur and animations */}
-      <div className="absolute inset-0 overflow-hidden will-change-transform">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-blue-600/15 to-purple-600/15 rounded-full blur-2xl animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-green-600/15 to-teal-600/15 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-pink-600/8 to-orange-600/8 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '2s' }}></div>
-      </div>
+    <div className="min-h-screen mx-auto py-16 px-6 sm:px-12 md:px-20 lg:px-24  text-white relative overflow-hidden">
+     
 
-      <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Header Section */}
-        <div className={`text-center mb-20 transition-all duration-700 will-change-transform ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-          <h1 className="text-5xl md:text-7xl font-bold bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent mb-6">
-            About Me
-          </h1>
-          <div className="w-24 h-1 bg-gradient-to-r from-blue-500 to-purple-600 mx-auto rounded-full"></div>
-        </div>
+      <div className="relative z-10 container ">
+         {/* Header Section */}
+          <div>
+          <PageHeader 
+          subtitle= " 🌟 Driven by Curiosity" 
+          title="Behind the "
+          titleAddon={
+            <span className="">
+              Portfolio
+            </span>
+           } 
+        />
+          </div>
 
         {/* Main Content Grid */}
         <div className="grid grid-cols-1 xl:grid-cols-12 gap-12 items-start">
@@ -93,14 +106,23 @@ const PortfolioAbout = () => {
                 </div>
 
                 {/* Optimized Image Card */}
-                <div className={`lg:w-1/3 xl:w-1/4 flex-shrink-0 transition-all duration-700 will-change-transform ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`} style={{ transitionDelay: '700ms' }}>
-                  <div className="relative group">
+                <div className={`w-full sm:w-2/3 lg:w-1/3 xl:w-1/4 flex-shrink-0 transition-all duration-700 will-change-transform ${isVisible ? 'translate-x-0 opacity-100' : 'translate-x-10 opacity-0'}`} style={{ transitionDelay: '700ms' }}>
+                  {/* Optimized Image Card with tap-to-reveal support */}
+                  <div
+                    id="tap-image-card"
+                    className={`relative group ${isTapped ? 'tapped' : ''}`}
+                    onTouchStart={() => {
+                      if (isMobile) setIsTapped((prev) => !prev);
+                    }}
+                  >
                     <div className="bg-white/5 backdrop-blur-lg rounded-3xl p-4 border border-white/10 shadow-xl hover:shadow-blue-500/10 transition-all duration-500 group-hover:border-blue-500/30">
                       <div className="relative overflow-hidden rounded-2xl">
-                        {/* Simplified gradient overlay */}
-                        <div className="absolute inset-0 bg-gradient-to-tr from-blue-600/15 via-transparent to-purple-600/15 z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-400"></div>
-                        
-                        {/* Image container */}
+                        <div
+                          className={`absolute inset-0 bg-gradient-to-tr from-blue-600/15 via-transparent to-purple-600/15 z-10 transition-opacity duration-400 ${
+                            isTapped ? 'opacity-100' : 'opacity-0'
+                          } group-hover:opacity-100`}
+                        ></div>
+
                         <div className="relative aspect-[4/5] overflow-hidden rounded-2xl">
                           <Image
                             fill
@@ -109,23 +131,37 @@ const PortfolioAbout = () => {
                             className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                             loading="lazy"
                           />
-                          
-                          {/* Simplified floating particles */}
-                          <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-400 pointer-events-none">
-                            <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-blue-400 rounded-full animate-ping" style={{ animationDelay: '100ms' }}></div>
-                            <div className="absolute top-3/4 right-1/4 w-1 h-1 bg-purple-400 rounded-full animate-ping" style={{ animationDelay: '300ms' }}></div>
-                            <div className="absolute bottom-1/3 left-1/3 w-1.5 h-1.5 bg-pink-400 rounded-full animate-ping" style={{ animationDelay: '500ms' }}></div>
+
+                          {/* Floating Pings */}
+                          <div
+                            className={`absolute inset-0 pointer-events-none transition-opacity duration-400 ${
+                              isTapped ? 'opacity-100' : 'opacity-0'
+                            } group-hover:opacity-100`}
+                          >
+                            <div
+                              className="absolute top-1/4 left-1/4 w-2 h-2 bg-blue-400 rounded-full animate-ping"
+                              style={{ animationDelay: '100ms' }}
+                            ></div>
+                            <div
+                              className="absolute top-3/4 right-1/4 w-1 h-1 bg-purple-400 rounded-full animate-ping"
+                              style={{ animationDelay: '300ms' }}
+                            ></div>
+                            <div
+                              className="absolute bottom-1/3 left-1/3 w-1.5 h-1.5 bg-pink-400 rounded-full animate-ping"
+                              style={{ animationDelay: '500ms' }}
+                            ></div>
                           </div>
                         </div>
 
-                        {/* Fixed Overlay content */}
-                        <div 
-                          className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-4 h-28 translate-y-full group-hover:translate-y-0 transition-transform duration-400 flex flex-col justify-end z-30"
-                          style={{ pointerEvents: 'auto' }}
+                        {/* Bottom Reveal Info Box */}
+                        <div
+                          className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent p-4 h-28 transition-transform duration-400 flex flex-col justify-end z-30 ${
+                            isTapped ? 'translate-y-0' : 'translate-y-full'
+                          } group-hover:translate-y-0`}
                         >
                           <h3 className="text-base font-bold text-white mb-1">Ashmit Singh</h3>
                           <p className="text-blue-400 font-semibold text-xs mb-2">Full Stack Developer</p>
-                          <button 
+                          <button
                             onClick={handleConnectClick}
                             className="inline-flex items-center justify-center px-3 py-1.5 bg-white/20 backdrop-blur-sm border border-white/30 rounded-full font-medium text-white text-xs transition-all duration-200 hover:bg-white/30 hover:scale-105 w-fit cursor-pointer z-40"
                             type="button"
@@ -136,15 +172,15 @@ const PortfolioAbout = () => {
                         </div>
                       </div>
 
-                      {/* Simplified decorative elements */}
                       <div className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full opacity-60 group-hover:opacity-100 transition-opacity duration-400"></div>
                       <div className="absolute -bottom-3 -left-3 w-6 h-6 bg-gradient-to-br from-pink-500 to-orange-500 rounded-full opacity-40 group-hover:opacity-80 transition-opacity duration-400"></div>
                     </div>
 
-                    {/* Reduced glow effect */}
                     <div className="absolute inset-0 bg-gradient-to-r from-blue-600/5 to-purple-600/5 rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"></div>
                   </div>
+
                 </div>
+
               </div>
             </div>
           </div>
@@ -215,7 +251,15 @@ const PortfolioAbout = () => {
             </div>
           </div>
         </div>
+
       </div>
+      <div className='mt-20'>
+      <DescriptionCard 
+        title="Forever Evolving, Passionately Creating"
+        description="I believe in continuous improvement and staying up-to-date with the latest web technologies. Every project is an opportunity to learn something new and push the boundaries of what's possible on the web."
+        />
+      </div>
+
     </div>
   );
 };

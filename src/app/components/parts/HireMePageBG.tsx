@@ -14,7 +14,7 @@ const SpaceBackground: React.FC<SpaceBackgroundProps> = ({
   return (
     <div
       ref={containerRef}
-      className={`fixed inset-0 w-full h-full overflow-hidden ${className}`}
+      className={`fixed inset-0 w-full min-h-screen overflow-hidden ${className}`}
       style={{ zIndex: 1 }}
     >
       {/* Premium dark space gradient */}

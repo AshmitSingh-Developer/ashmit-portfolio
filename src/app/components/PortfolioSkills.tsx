@@ -11,6 +11,7 @@ import { CiServer } from "react-icons/ci";
 import { BsTools } from "react-icons/bs";
 import { IoLogoVercel } from "react-icons/io5";
 import { SiNextdotjs, SiTypescript, SiTailwindcss, SiExpress, SiMongodb, SiVite } from 'react-icons/si';
+import PageHeader from './parts/PageHeader';
 
 // TypeScript interfaces
 interface Technology {
@@ -116,7 +117,7 @@ const SkillCard = memo<SkillCardProps>(({ skill }) => {
       </div>
       {/* Card Bio */}
       <AnimationReveal variantType='slide-up-2'>
-        <p className="text-gray-400 text-Avertastd mb-4">
+        <p className="text-gray-400 text-[14px] text-Avertastd mb-4">
           {skill.bio}
         </p>
       </AnimationReveal>
@@ -226,21 +227,17 @@ const PortfolioSkills = () => {
       className="bg-cover z-[5px] bg-center h-auto w-auto"
       style={{ backgroundColor: 'transparent' }}
     >
-      <div className="w-full z-10 py-4 min-h-[80vh] text-white">
+      <div className="w-full z-10 mt-12 sm:mt-14 py-4 min-h-[80vh] text-white">
         <div className="container mx-auto px-4">
-          {/* Page Title */}
-          <AnimationReveal variantType="slide-right">
-            <h2 className="text-3xl font-bold text-left text-title">Skills</h2>
-          </AnimationReveal>
-          {/* Page Title Underline */}
-          <AnimationReveal variantType='slide-left-underline'>
-            <div className="h-1 w-10 rounded-4xl bg-title-ul"></div>
-          </AnimationReveal>
-
-          {/* Page Bio */}
-          <AnimationReveal variantType="fade-in">
-            <p className='text-muted-foreground my-font1 max-w-2xl mt-3 mb-5 sm:mb-8'>I&apos;ve worked with a range of technologies in the web development world, from frontend to backend and everything in between.</p>
-          </AnimationReveal>
+          <PageHeader 
+          subtitle="🚀 My Technical Journey" 
+          title="Skills and " 
+          titleAddon={
+            <span className="">
+              Experience
+            </span>
+           } 
+        />
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {memoizedSkills.map((skill) => (
               <SkillCard key={skill.title} skill={skill} />
