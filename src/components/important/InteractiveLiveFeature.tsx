@@ -39,6 +39,23 @@ const InteractiveStatusPanel: React.FC = () => {
     return () => clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const updateConnection = () => {
+      setConnectionStatus(navigator.onLine ? 'online' : 'offline');
+    };
+
+    window.addEventListener('online', updateConnection);
+    window.addEventListener('offline', updateConnection);
+
+    updateConnection(); // initial check on load
+
+    return () => {
+      window.removeEventListener('online', updateConnection);
+      window.removeEventListener('offline', updateConnection);
+    };
+  }, []);
+
+
   const handleFullscreen = () => {
     setIsFullscreen(!isFullscreen);
     if (!document.fullscreenElement) {
