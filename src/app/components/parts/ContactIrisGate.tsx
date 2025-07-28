@@ -49,7 +49,7 @@ const IrisGateCard = ({ availableCardRef, availableInView, cardVariants, itemVar
   // Pre-calculate dimensions for better performance
   const dimensions = useMemo(() => {
     const vw = typeof window !== 'undefined' ? window.innerWidth : 800;
-    const vh = typeof window !== 'undefined' ? window.innerHeight : 600;
+    // const vh = typeof window !== 'undefined' ? window.innerHeight : 600;
     return {
       outerRing: Math.min(vw * 0.8, 400),
       middleRing: Math.min(vw * 0.6, 300),
@@ -113,7 +113,7 @@ const IrisGateCard = ({ availableCardRef, availableInView, cardVariants, itemVar
         >
           I am actively seeking new roles and collaborations.
         </motion.p>
-        <p className="text-[10px] text-cyan-600 mt-2  cursor-pointer">I'm ready to collaborate — tap to learn more</p>
+        <p className="text-[10px] text-cyan-600 mt-2  cursor-pointer">I&apos;m ready to collaborate — tap to learn more</p>
       </motion.div>
 
       {/* Optimized Space Iris Gate Overlay */}

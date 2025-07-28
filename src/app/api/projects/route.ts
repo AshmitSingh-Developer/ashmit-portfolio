@@ -13,8 +13,9 @@ export async function GET() {
       .toArray();
 
     return NextResponse.json(projects);
-  } catch (err: any) {
-    console.error("❌ GET Error:", err);
+  } catch (err) {
+    const error = err instanceof Error ? err : new Error(String(err));
+    console.error("❌ GET Error:", error);
     return NextResponse.json({ error: "Failed to fetch projects" }, { status: 500 });
   }
 }
@@ -40,8 +41,9 @@ export async function POST(req: Request) {
     console.log('✅ Inserted ID:', result.insertedId);
     return NextResponse.json({ success: true, id: result.insertedId });
 
-  } catch (err: any) {
-    console.error('❌ API ERROR:', err); // <-- THIS is what we need
-    return NextResponse.json({ success: false, error: err.message }, { status: 500 });
+  } catch (err) {
+    const error = err instanceof Error ? err : new Error(String(err));
+    console.error('❌ API ERROR:', error);
+    return NextResponse.json({ success: false, error: error.message }, { status: 500 });
   }
 }

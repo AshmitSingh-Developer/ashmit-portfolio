@@ -609,7 +609,7 @@ useEffect(() => {
       toast.error(error.message || "Failed to send message. Please try again.");
     } finally {
       setIsSubmitting(false);
-    }1
+    }
   }, [formData, reset,emailStatus]);
 
   return { formData, updateField, handleSubmit, isSubmitting, emailStatus, emailError,reset,setIsSubmitting };

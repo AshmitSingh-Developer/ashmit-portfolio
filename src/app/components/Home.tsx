@@ -4,7 +4,7 @@ import { useTypewriter, Cursor } from 'react-simple-typewriter';
 import MyDeveloperSvg from './parts/HomePageSvg/DeveloperSvg';
 import React, { useState, useEffect, useRef, useCallback, MouseEvent } from 'react';
 
-import { FaLinkedinIn, FaGithub, FaInstagram, FaDownload, FaHeart, FaStar } from 'react-icons/fa';
+import { FaLinkedinIn, FaGithub, FaInstagram, FaStar } from 'react-icons/fa';
 import { FaXTwitter } from "react-icons/fa6";
 
 // Developer SVG container
@@ -64,7 +64,7 @@ const PortfolioHome = () => {
         <div className='max-w-xl'>
 
           <p className='text-xl md:text-2xl text-slate-300 mb-1 ml-1 font-light tracking-wide'>
-             Hi, I'm
+             Hi, I&apos;m
           </p>
 
           <div className="relative mb-3">

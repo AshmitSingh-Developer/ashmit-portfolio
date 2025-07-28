@@ -8,7 +8,7 @@ import Footer from '@/components/important/PortfolioFooter';
 const projects = ['Portfolio Website', 'Admin Panel', 'Contact Form', 'Project Showcase', 'Other'];
 
 export default function SuggestPage() {
-  const [selectedProject, setSelectedProject] = useState('');
+  // const [selectedProject, setSelectedProject] = useState('');
   const [form, setForm] = useState({ name: '', project: '', message: '' });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {

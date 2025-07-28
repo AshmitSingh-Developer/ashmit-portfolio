@@ -54,7 +54,7 @@ export default function AdminLogin() {
       } else {
         setError('Invalid credentials');
       }
-    } catch (err) {
+    } catch {
       setError('Something went wrong');
     } finally {
       setIsLoading(false);

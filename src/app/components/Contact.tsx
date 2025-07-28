@@ -202,7 +202,7 @@ useEffect(() => {
         title="Get in Touch &ndash; " 
         titleAddon={
           <span className="">
-            Let's Connect
+            Let&apos;s Connect
           </span>
          }
       />

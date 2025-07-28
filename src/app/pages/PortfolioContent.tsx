@@ -5,7 +5,6 @@ import Navbar from '../components/PortfolioNavbar';
 import Home from '../components/PortfolioHome';
 import Footer from '../../components/important/PortfolioFooter'
 import SkeletonSkills from '../data/skeletons/SkeletonSkills';
-import SkeletonProjects from '../data/skeletons/SkeletonProject';
 
 import { useScrollToHash } from '../hooks/useScrollTOHash';
 import { useUpdateHashOnScroll } from '../hooks/useUpdateHashonScroll';

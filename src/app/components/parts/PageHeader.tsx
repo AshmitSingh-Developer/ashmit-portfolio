@@ -63,7 +63,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
     };
 
     animate();
-  }, [isInView]);
+  }, [isInView,subtitleControls,titleControls]);
 
   return (
     <div ref={ref} className={`text-center unselectable mb-12 ${className}`}>
